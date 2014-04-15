@@ -5,7 +5,7 @@ require_once('ly_check.php');
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>夏日PHP图书管理系统</title>
+<title></title>
 <style type="text/css">
 <!--
 body {
@@ -66,7 +66,7 @@ date_default_timezone_set("Etc/GMT-8");
       
       <tr>
         <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span class="STYLE19">软件版本</span></div></td>
-        <td height="20" align="center" bgcolor="#FFFFFF" class="STYLE19"><!--删除后将无法获得最新版本--><script type="text/javascript" src="http://www.04ie.com/net/phpbook0_2.js"></script></td>
+        <td height="20" align="center" bgcolor="#FFFFFF" class="STYLE19">网上图书后台管理系统V1</td>
       </tr>
       <tr>
         <td width="23%" height="20" align="left" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span class="STYLE19">php版本</span></div></td>
@@ -105,8 +105,8 @@ date_default_timezone_set("Etc/GMT-8");
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">系统管理员</div></td>
       </tr>
       <tr>
-        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">在线使用帮助</div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="http://www.04ie.com/codes/700.html" target="_blank">查看在线帮助文档</a></div></td>
+        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">关于作者</div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="http://www.domon.cn" target="_blank">查看主页</a></div></td>
       </tr>
     </table></td>
   </tr>

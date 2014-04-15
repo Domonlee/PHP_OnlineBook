@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>夏日PHP图书管理系统v0.2</title>
+<title></title>
 <style type="text/css">
 <!--
 body {
@@ -52,6 +52,9 @@ body {
 <div  style="height:100%;">
   <ul id="navigation">
     <li> <a class="head">系统设置</a>
+      <ul>
+        <li><a href="ly_reg.php" target="rightFrame">管理员注册</a></li>
+      </ul>
       <ul>
         <li><a href="ly_pwd.php" target="rightFrame">密码修改</a></li>
       </ul>

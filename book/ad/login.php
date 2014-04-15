@@ -16,7 +16,7 @@ require_once("../config.php");
 		<?php
 			die();
 		}
-		$sql="select * from admin where username='$username' and password='$pwd'";
+		$sql="select * from admin where adminname='$username' and password='$pwd'";
 		$rs=mysql_query($sql);
 		if(mysql_num_rows($rs)==1)
 		{

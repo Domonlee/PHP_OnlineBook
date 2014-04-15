@@ -36,7 +36,6 @@ a img {
             <td width="248" background="images/main_06.gif"><table width="225" border="0" align="center" cellpadding="0" cellspacing="0">
               <tr>
                 <td height="17"><div align="right"><a href="ly_pwd.php" target="rightFrame"><img src="images/pass.gif" width="69" height="17" border="0" /></a></div></td>
-                <td><div align="right"><a href="ly_pwd.php" target="rightFrame"><img src="images/user.gif" width="69" height="17" border="0" /></a></div></td>
                 <td><div align="right"><a href="login.php?tj=out" target="_parent"><img src="images/quit.gif" alt=" " width="69" height="17" border="0" /></a></div></td>
               </tr>
             </table></td>
@@ -88,7 +87,7 @@ a img {
         <td width="39"><img src="images/main_30.gif" width="39" height="30" /></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="20" valign="bottom"><span class="STYLE1">当前登录用户：admin &nbsp;用户角色：管理员</span></td>
+            <td height="20" valign="bottom"><span class="STYLE1">当前登录用户角色：管理员</span></td>
             <td valign="bottom" class="STYLE1"><div align="right"></div></td>
           </tr>
         </table></td>
