@@ -58,8 +58,8 @@ body {
     </li>
 	 <li><a class="head">图书管理</a>
        <ul>
-        <li><a href="list.php" target="rightFrame">书籍管理</a></li>
-		<li><a href="add.php" target="rightFrame">新书入库</a></li>
+        <li><a href="list_book.php" target="rightFrame">书籍管理</a></li>
+		<li><a href="add_book.php" target="rightFrame">新书入库</a></li>
       </ul>
     </li>
 	 <li><a class="head">查询管理</a>

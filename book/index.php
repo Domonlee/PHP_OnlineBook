@@ -46,7 +46,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 	}
 	$rs=mysql_query($sql);
 ?>
-  <table width="999" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+  <table class="hovertable" width="999" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
       <tr>
         <td width="6%" height="35" align="center" bgcolor="#FFFFFF">ID</td>
         <td width="21%" align="center" bgcolor="#FFFFFF">书名</td>
@@ -76,13 +76,13 @@ error_reporting(E_ALL & ~E_NOTICE);
 	    <!--<td class="td_bg" width="20%">  -->
 	  <td align="center" bgcolor="#FFFFFF" class="line2">
 	  <?php 
-	  $rs2=mysql_query("select * from lend where book_id='".$rows['id']."' and user_id='".$_SESSION['id']."'");
+	  $rs2=mysql_query("select * from buybook where book_id='".$rows['id']."' and user_id='".$_SESSION['id']."'");
 	  $rows2=mysql_fetch_assoc($rs2);
 	  if($rows2['book_id']){
-	  echo "<font color='red'>您已借阅</font>&nbsp;&nbsp;<a href=huanshu.php?book_id=$rows[id]>我要还书</a>";
+	  echo "<font color='red'>您已购买</font>&nbsp;&nbsp;<a href=huanshu.php?book_id=$rows[id]>我要还书</a>";
 	  }else{
 	  	if($rows["leave_number"]==0){
-		echo "<font color='#cccc00'>该书已借完</font>";
+		echo "<font color='#cccc00'>该书已没有库存</font>";
 		}else{
 	  echo "<a href=jieshu.php?book_id=$rows[id]>我要借书</a>";
 	  }
@@ -122,8 +122,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 </table>
         <table width="782" height="30" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
           <tr>
-            <td height="19" align="center" background="button1_bg.jpg">&nbsp;Copyright @ 2013-2015 您的网址.com ALL Rights Reserved
-      <!--本源码免费开源，保留版权信息你将获得本站免费技术支持和程序升级服务。-->
+            <td height="19" align="center" background="button1_bg.jpg">&nbsp;Copyright @ 2014-2014 domon.cn ALL Rights Reserved
       <script type="text/javascript" src="http://www.04ie.com/net/cpt.js"></script></td>
           </tr>
         </table>
