@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>书籍管理系统</title>
+<title></title>
 <style type="text/css">
 <!--
 body {
@@ -66,7 +66,7 @@ a img {
         <td width="248" background="images/main_11.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="16%"><span class="STYLE5"></span></td>
-            <td width="75%"><div align="center"><span class="STYLE7">By (<a href="http://www.domon.cn" target="_blank">Domon.cn</a>)</span></div></td>
+            <td width="75%"><div align="center"><span class="STYLE7">By by (<a href="http://www.domon.cn" target="_blank">domon.cn</a>)</span></div></td>
             <td width="9%">&nbsp;</td>
           </tr>
         </table></td>
@@ -87,7 +87,7 @@ a img {
         <td width="39"><img src="images/main_30.gif" width="39" height="30" /></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td height="20" valign="bottom"><span class="STYLE1">当前登录用户角色：管理员</span></td>
+            <td height="20" valign="bottom"><span class="STYLE1">当前登录用户：admin &nbsp;用户角色：管理员</span></td>
             <td valign="bottom" class="STYLE1"><div align="right"></div></td>
           </tr>
         </table></td>

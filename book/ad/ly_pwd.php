@@ -1,13 +1,17 @@
-<?php require_once('ly_check.php'); ?>
+<?php
+	require_once("../config.php");
+	include("ly_check.php");
+?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>夏日PHP图书管理系统v0.1</title>
+<title>密码修改</title>
 <link href="images/css.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <?php
 $password=$_SESSION["pwd"];
+$id=$_SESSION["id"];
 $sql="select * from admin where password='$password'";
 $rs=mysql_query($sql);
 $rows=mysql_fetch_assoc($rs);
@@ -16,7 +20,8 @@ if($_POST["Submit"])
 if($rows["password"]==$_POST["password"])
 		{
 		$password2=$_POST["password2"];
-        $sql="update admin set password='$password2' where id=1";
+		//当前默认id是1
+        $sql="update admin set password='$password2' where id='$id'";
 		mysql_query($sql);
 		echo "<script language=javascript>alert('修改成功,请重新进行登陆！');window.location='login.php'</script>";
 		exit();
@@ -42,7 +47,7 @@ if($rows["password"]==$_POST["password"])
     </tr>
     <tr> 
       <td width="40%" align="right" class="td_bg">用户名：</td>
-      <td width="60%" class="td_bg"><?php echo $rows["username"] ?></td>
+      <td width="60%" class="td_bg"><?php echo $rows["adminname"] ?></td>
     </tr>
     <tr> 
       <td align="right" class="td_bg">原密码：</td>

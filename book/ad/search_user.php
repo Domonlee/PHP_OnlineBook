@@ -19,8 +19,8 @@ require_once('ly_check.php');
           <tr>
             <td width="36%" align="center">
               <select name="seltype" id="seltype">
-                <option value="name">用户名称</option>
-                <option value="ID">用户标识</option>
+                <option value="username">用户名称</option>
+                <option value="sex">用户性别</option>
                 <option value="email">用户邮件</option>
                 <option value="tel">用户电话</option>
                 <option value="address">用户地址</option>
@@ -39,16 +39,18 @@ require_once('ly_check.php');
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC" class="table" >
       
       <tr>
-        <td width="6%" height="35" align="center" bgcolor="#FFFFFF">用户标识</td>
-        <td width="21%" align="center" bgcolor="#FFFFFF">用户名称</td>
-        <td width="21%" align="center" bgcolor="#FFFFFF">用户邮件</td>
-        <td width="20%" align="center" bgcolor="#FFFFFF">用户电话</td>
-        <td width="32%" align="center" bgcolor="#FFFFFF">用户地址</td>
+        <td height="26" width="21%" align="center" bgcolor="#FFFFFF">用户名称</td>
+        <td width="10%" align="center" bgcolor="#FFFFFF">用户性别</td>
+        <td width="12%" align="center" bgcolor="#FFFFFF">用户生日</td>
+	<td width="21%" align="center" bgcolor="#FFFFFF">用户邮件</td>
+        <td width="12%" align="center" bgcolor="#FFFFFF">用户电话</td>
+        <td width="23%" align="center" bgcolor="#FFFFFF">用户地址</td>
       </tr>
 <?php
 	$pagesize=10;
 	$sql = "select * from user where ".$_POST[seltype]." like ('%".$_POST[coun]."%')";
 	$rs=mysql_query($sql) or die("请输入查询条件!!!");
+
 	$recordcount=mysql_num_rows($rs);
 	$pagecount=($recordcount-1)/$pagesize+1;
 	$pagecount=(int)$pagecount;
@@ -66,7 +68,7 @@ require_once('ly_check.php');
 		$pageno=$pagecount;
 	}
 	$startno=($pageno-1)*$pagesize;
-	$sql="select * from user where ".$_POST[seltype]." like ('%".$_POST[coun]."%') order by id desc limit $startno,$pagesize";
+	$sql="select * from user where ".$_POST[seltype]." like ('%".$_POST[coun]."%') order by username desc limit $startno,$pagesize";
 	$rs=mysql_query($sql);
 ?>
      <?php
@@ -74,13 +76,12 @@ require_once('ly_check.php');
 	{
 	?>
 	    <tr align="center">
-	    <td class="td_bg" width="6%"><?php echo $rows["ID"]?></td>
-	    <td class="td_bg" width="21%" height="26"><?php echo $rows["name"]?></td>
+	    <td class="td_bg" width="21%" height="26"><?php echo $rows["username"]?></td>
+	    <td class="td_bg" width="10%" height="26"><?php echo $rows["sex"]?></td>
+	    <td class="td_bg" width="12%" height="26"><?php echo $rows["birth"]?></td>
 	    <td class="td_bg" width="21%" height="26"><?php echo $rows["email"]?></td>
 	    <td width="12%" height="20" class="td_bg"><?php echo $rows["tel"]?></td>
-	    <td width="12%" height="32" class="td_bg"><?php echo $rows["address"]?></td>
-	    <td class="td_bg" width="20%">
-	    <!--<a href="update.php?ID=<?php echo $rows[ID] ?>" class="trlink">修改</a>&nbsp;&nbsp;<a href="del.php?ID=<?php echo $rows[ID] ?>" class="trlink">删除</a></td> -->
+	    <td width="23%" height="32" class="td_bg"><?php echo $rows["address"]?></td>
 	    </tr>
 	<?php
 	}

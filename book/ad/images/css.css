@@ -93,6 +93,10 @@ height:15px;padding-top:2px;border:1px solid #7F9DB9;color:#1E5494;
 	background:#865802;
 }
 
+
+
+
+
 .leftframetable{
 	border: 1px solid #4C3500;
 	margin-top: 3px;
@@ -110,30 +114,3 @@ a.trlink:link {color: #344b50;} /* 未访问的链接 */
 a.trlink:visited {color: #344b50;} /* 已访问的链接 */
 a.trlink:hover{color: #344b50;} /* 鼠标在链接上 */ 
 a.trlink:active {color: #344b50;} /* 点击激活链接 */
-
-
-table.hovertable {
-	font-family: verdana,arial,sans-serif;
-	font-size:11px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #999999;
-	border-collapse: collapse;
-}
-table.hovertable th {
-	background-color:#c3dde0;
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
-table.hovertable tr {
-	background-color:#d4e3e5;
-}
-table.hovertable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
-

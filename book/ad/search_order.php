@@ -19,9 +19,8 @@ require_once('ly_check.php');
           <tr>
             <td width="36%" align="center">
               <select name="seltype" id="seltype">
-                <option value="formnum">订单号</option>
-                <option value="user_name">用户姓名</option>
-                <option value="book_name">图书名称</option>
+                <option value="orderid">订单号</option>
+                <option value="username">客户姓名</option>
               </select>            </td>
             <td width="31%" align="center">
               <input type="text" name="coun" id="coun" />            </td>
@@ -37,18 +36,18 @@ require_once('ly_check.php');
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC" class="table" >
       
       <tr>
-        <td width="6%" height="35" align="center" bgcolor="#FFFFFF">订单号</td>
-        <td width="12%" align="center" bgcolor="#FFFFFF">用户姓名</td>
-        <td width="15%" align="center" bgcolor="#FFFFFF">图书名称</td>
-        <td width="10%" align="center" bgcolor="#FFFFFF">图书价格</td>
-        <td width="12%" align="center" bgcolor="#FFFFFF">订购数量</td>
-        <td width="21%" align="center" bgcolor="#FFFFFF">送货地址</td>
-        <td width="9%" align="center" bgcolor="#FFFFFF">订单状态</td>
+	<th height="26" class="td_bg">订单编号</th>
+	<th class="td_bg">客户姓名</th>
+        <th class="td_bg">订货时间</th>
+        <th class="td_bg">处理情况</th>
+        <th class="td_bg">订单详情</th>
+        <th class="td_bg">删除订单</th
       </tr>
 <?php
 	$pagesize=10;
-	$sql = "select * from buybook where ".$_POST[seltype]." like ('%".$_POST[coun]."%')";
+	$sql = "select * from orders where ".$_POST[seltype]." like ('%".$_POST[coun]."%')";
 	$rs=mysql_query($sql) or die("请输入查询条件!!!");
+
 	$recordcount=mysql_num_rows($rs);
 	$pagecount=($recordcount-1)/$pagesize+1;
 	$pagecount=(int)$pagecount;
@@ -66,7 +65,7 @@ require_once('ly_check.php');
 		$pageno=$pagecount;
 	}
 	$startno=($pageno-1)*$pagesize;
-	$sql="select * from buybook where ".$_POST[seltype]." like ('%".$_POST[coun]."%') order by formnum desc limit $startno,$pagesize";
+	$sql="select * from orders where ".$_POST[seltype]." like ('%".$_POST[coun]."%') order by orderid desc limit $startno,$pagesize";
 	$rs=mysql_query($sql);
 ?>
      <?php
@@ -74,15 +73,26 @@ require_once('ly_check.php');
 	{
 	?>
 	    <tr align="center">
-	    <td class="td_bg" width="6%"><?php echo $rows["formnum"]?></td>
-	    <td class="td_bg" width="12%" height="26"><?php echo $rows["user_name"]?></td>
-	    <td class="td_bg" width="15%" height="26"><?php echo $rows["book_name"]?></td>
-	    <td class="td_bg" width="10%" height="26"><?php echo $rows["book_price"]?></td>
-	    <td width="12%" height="26" class="td_bg"><?php echo $rows["booknum"]?></td>
-	    <td width="21%" height="26" class="td_bg"><?php echo $rows["user_address"]?></td>
-	    <td width="9%" height="26" class="td_bg"><?php echo $rows["formstate"]?></td>
-	    <td class="td_bg" width="20%">
-	    <a href="update.php?formnum=<?php echo $rows[formnum] ?>" class="trlink">修改</a>&nbsp;&nbsp;<a href="del.php?formnum=<?php echo $rows[formnum] ?>" class="trlink">删除</a></td>
+	    <td class="td_bg" ><?php echo $rows["orderid"]?></td>
+	    <td class="td_bg" height="26"><?php echo $rows["username"]?></td>
+	    <td class="td_bg" height="26"><?php echo $rows["time"]?></td>
+	    <td class="td_bg" height="26">
+	    <?php
+		if ($rows["flag"]==1)
+		{
+		?>
+		<div style="color:#FF0000">处理完毕!</div>
+		<?php	
+		}
+		else
+		{
+		?>
+		<div style="color:#00CC00">尚未处理!</div>
+		<?php
+		}
+	?>	</td>
+        <td align="center" class="td_bg"><a href="Detail_order.php?id=<?php echo $rows["orderid"]?>" class="trlink">订单详情</a></td>
+	<td align="center" class="td_bg" onclick="if(confirm('确定要删除吗?')){location.href='Del_order.php?id=<?php echo $rows["orderid"]?>'}" class="trlink">删除</td>
 	    </tr>
 	<?php
 	}

@@ -1,32 +1,8 @@
 <!--
-body,td,th {font-family: Î¢ÈíÑÅºÚ;font-size: 10pt;color: #222;}
+body,td,th {font-family: ËÎÌå;font-size: 9pt;color: #222;}
 body {margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;background-color: #FFFFFF;line-height:20px;}
 a:link {color: #222;text-decoration: none;}
 a:visited {text-decoration: none;color: #222;}
 a:hover {text-decoration: underline;color: #FF0000;}
-table.hovertable {
-	font-family: verdana,arial,sans-serif;
-	font-size:11px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #999999;
-	border-collapse: collapse;
-}
-table.hovertable th {
-	background-color:#c3dde0;
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
-table.hovertable tr {
-	background-color:#d4e3e5;
-}
-table.hovertable td {
-	border-width: 1px;
-	padding: 8px;
-	border-style: solid;
-	border-color: #a9c6c9;
-}
 a:active {text-decoration: none;color: #999999;}
 -->

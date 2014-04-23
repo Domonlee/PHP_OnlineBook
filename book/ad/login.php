@@ -2,11 +2,9 @@
 require_once("../config.php"); 
 ?>
 <?php
-//去掉错误
-	error_reporting(E_ALL & ~E_NOTICE);
 	if($_POST["Submit"])
 	{
-		$username=$_POST["username"];
+		$adminname=$_POST["adminname"];
 		$pwd=$_POST["pwd"];
 		$code=$_POST["code"];
 		if($code<>$_SESSION["auth"])
@@ -16,13 +14,13 @@ require_once("../config.php");
 		<?php
 			die();
 		}
-		$sql="select * from admin where adminname='$username' and password='$pwd'";
+		$sql="select * from admin where adminname='$adminname' and password='$pwd'";
 		$rs=mysql_query($sql);
 		if(mysql_num_rows($rs)==1)
 		{
 			$_SESSION["pwd"]=$_POST["pwd"];
 			$_SESSION["admin"]=session_id();
-			echo "<script language=javascript>alert('登陆成功！');window.location='admin_index.php'</script>";
+			echo "<script language=javascript>alert('登陆成功！');window.location='Admin_index.php'</script>";
 		}
 		else
 		{
@@ -43,7 +41,7 @@ if($_GET['tj'] == 'out'){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>后台管理系统登陆</title>
+<title>书籍管理系统登陆</title>
 <link rel="stylesheet" type="text/css" href="images/style.css"/>
 </head>
 <body>
@@ -54,7 +52,7 @@ if($_GET['tj'] == 'out'){
     <div id="center_middle">
       <div class="user">
         <label>用户名：
-        <input type="text" name="username" id="username" />
+        <input type="text" name="adminname" id="adminname" />
         </label>
       </div>
       <div class="user">

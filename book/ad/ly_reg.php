@@ -1,131 +1,142 @@
-<?php
-include("../config.php");
+<?php 
+require_once("../config.php");
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title></title>
-<link rel="stylesheet" href="style.css" type="text/css">
-</head>
-<script language="javascript"> 
-    function checkreg()
-    { 			
-		if (form1.name.value=="")
+<link rel="stylesheet" type="text/css" href="image/css.css">
+<script language="javascript">
+	var flag="";
+	function checkForm()
+	{
+		if(frm.adminname.value=="")
 		{
-	        alert("真实姓名不能为空！");
-			form1.name.focus();
-			return false;
-	    }
-		if (form1.password.value=="" )
-		{
-	        alert("密码不能为空！");
-			form1.password.focus();
-			return false;
-	    }
-		if (form1.pwd.value=="" )
-		{
-	        alert("确认密码不能为空！");
-			form1.pwd.focus();
-			return false;
-	    }
-		if (form1.password.value!=form1.pwd.value && form1.password.value!="")
-		{
-			alert("两次密码不一样，请确认！");
-			form1.password.focus();
+			alert("用户名不能为空")
+			frm.adminname.focus()
 			return false;
 		}
-		if (form1.email.value=="")
+		if(flag=="1")
 		{
-			// 如果Email为空，则显示警告信息
-	        alert("Email不能为空！");
-			form1.email.focus();
-			return false;
-	    }
-		else if (form1.email.value.charAt(0)=="." ||
-			form1.email.value.charAt(0)=="@"||
-			form1.email.value.indexOf('@', 0) == -1 ||
-			form1.email.value.indexOf('.', 0) == -1 ||
-			form1.email.value.lastIndexOf("@")==form1.email.value.length-1 ||
-			form1.email.value.lastIndexOf(".")==form1.email.value.length-1)
-		{
-			alert("Email的格式不正确！");
-			form1.email.select();
+			alert("此用户名已经被注册");
+			frm.adminname.focus()
 			return false;
 		}
-		return true;
-
-    }	
+		if(frm.pwd.value=="")
+		{
+			alert("密码不能为空");
+			frm.pwd.focus()
+			return false
+		}
+		if(frm.pwd2.value=="")
+		{
+			alert("确认密码不能为空")
+			frm.pwd2.focus()
+			return false;
+		}
+		else
+		{
+			if(frm.pwd.value!=frm.pwd2.value)
+			{
+				alert("确认密码和密码要一致")
+				frm.pwd2.focus()
+				return false;
+			}
+		}
+	}
+	function ajaxSubmit()
+	{
+		//获取用户输入
+		var adminname=document.forms[0].adminname.value;
+		//创建XMLHttpRequest对象
+		var xmlhttp;
+		if (window.XMLHttpRequest) 
+		{ 
+			xmlhttp=new XMLHttpRequest();// Mozilla, Safari, ...浏览器
+			if (http_request.overrideMimeType) 
+			{//有些版本的Mozilla 浏览器处理服务器返回的未包含XML mime-type 头部信息的内容时会出错。因此，要确保返回的内容包含text/xml信息。
+				http_request.overrideMimeType("text/xml");
+			}
+		} 
+		else if (window.ActiveXObject) 
+		{ 
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");// IE浏览器
+		}
+		//创建请求结果处理程序
+		xmlhttp.onreadystatechange=function()
+		{
+			if(xmlhttp.readyState==4)
+			{
+				if(xmlhttp.status==200)//代表服务器端返回的是正确的结果，这样才有可能正确的解析XML。200表示正常返回；404表示找不到网页；500表示服务器内部错误
+				{
+					flag=xmlhttp.responseText
+					if(flag=="0")
+					{
+						msg.innerHTML="<span style=color:#009900; font-size:12px>恭喜,此用户没有被注册</span>"
+					}
+					else if(flag=="1")
+					{
+						msg.innerHTML="<span style=color:#FF0000; font-size:12px>抱歉,此用户已经被注册</span>"
+					}
+					else
+					{
+						msg.innerHTML="";
+					}
+				}
+				else
+				{	
+					alert("数据提交失败");
+				}
+			}
+		}
+		//打开连接，true代表异步，false代表同步
+		xmlhttp.open("post","checkAdminname.php",true);
+		//当方法为post时需要设置http头
+		xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+		//发送数据
+		var str="adminname="+escape(adminname);
+		xmlhttp.send(str);
+	}
 </script>
-<?php 
-if($_POST['submit']){
-// 取得网页的参数
-$adminname=$_POST['adminname'];
-$password=$_POST['password'];
-$email=$_POST['email'];
-$tele=$_POST['tele'];
-$truename=$_POST['truename'];
-// 加密密码 md5加密无法逆转
-//$password=md5($password);
-// 连接数据库，注册用户
-$sql="insert into admin(adminname, password, email, tele, truename) values('$adminname','$password','$email', '$tele','$truename')";
-mysql_query($sql,$conn) or die ("注册用户失败: ".mysql_error());
-
-// 获得注册用户的自动id，以后使用此id才可登录
-$result=mysql_query("select last_insert_id()",$conn);
-$re_arr=mysql_fetch_array($result);
-$id=$re_arr[0];
-
-//注册成功，自动登录，注册session变量
-session_register("adminuser");
-$user=$id;
-echo "<script language=javascript>alert('注册成功!');</script>";
+</head>
+<body>
+<?php
+	if ($_POST["Submit"])
+	{
+		$adminname=$_POST["adminname"];
+		$pwd=$_POST["pwd"];
+		$sql="insert into admin(adminname,password) values ('$adminname','$pwd')";
+		mysql_query($sql);
+		echo "<script language=javascript>alert('注册成功！');window.location='ly_right.php'</script>";
+		?>
+		<?php
+		exit();
 	}
 ?>
-<body>
-<form name="form1" method="post" action="" enctype='multipart/form-data' onSubmit="return checkreg()" >
-  <table width="782" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
-    <tr> 
-      <th colspan="2" bgcolor="#FFFFFF"><font size="5">管理员注册界面</font></th>
-    </tr>    
-    <tr> 
-      <td width="364" align="right" bgcolor="#FFFFFF">用户名：</td>
-      <td width="403" bgcolor="#FFFFFF"> 
-        <input type="text" name="adminname">
+<form id="frm" name="frm" method="post" action="" onsubmit="return checkForm()" >
+  <table class="table" width="100%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
+    <tr>
+      <th colspan="4" class="bg_tr" align="center">管理员注册</th>
     </tr>
-    <tr> 
-      <td align="right" bgcolor="#FFFFFF">密   码：</td>
-      <td bgcolor="#FFFFFF"> 
-        <input type="password" name="password">        
+    <tr>
+      <td width="40%" align="right" class="bg_tr" bgcolor="#FFFFFF">用户名:</td>
+      <td bgcolor="#FFFFFF"><input name="adminname" type="text" id="adminname" onkeyup="ajaxSubmit()"/><label id="msg"></label>
+      <label id="message"></label></td>
     </tr>
-	<tr> 
-      <td align="right" bgcolor="#FFFFFF">确认密码：</td>
-      <td bgcolor="#FFFFFF"> 
-        <input type="password" name="pwd">        
+    <tr>
+      <td width="40%" align="right" class="bg_tr" bgcolor="#FFFFFF">密码:</td>
+      <td bgcolor="#FFFFFF"><input name="pwd" type="text" id="pwd" /></td>
     </tr>
-	<tr> 
-      <td align="right" bgcolor="#FFFFFF">Email：</td>
-      <td bgcolor="#FFFFFF"> 
-        <input type="text" name="email">        
+    <tr>
+      <td width="40%" align="right" class="bg_tr" bgcolor="#FFFFFF">确认密码:</td>
+      <td bgcolor="#FFFFFF"><input name="pwd2" type="text" id="pwd2" /></td>
     </tr>
-	 <tr> 
-      <td align="right" bgcolor="#FFFFFF">电   话：</td>
-      <td bgcolor="#FFFFFF"> 
-        <input type="text" name="tele">
-    </tr>
-	<tr> 
-      <td align="right" bgcolor="#FFFFFF">真实姓名：</td>
-      <td bgcolor="#FFFFFF"> 
-        <input type="text" name="truename">
-    </tr>    
-    <tr> 
-      <td  align=right bgcolor="#FFFFFF" > 
-        <input type="submit" name="submit" value="注 册">
-      </td>
-      <td align=left bgcolor="#FFFFFF"> 
-        <input type="reset" name="submit" value="重 写">
-      </td>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#FFFFFF"><input type="submit" name="Submit" value="提交" />
+      <input type="reset" name="Submit2" value="重置" /></td>
     </tr>
   </table>
 </form>
 </body>
 </html>
+

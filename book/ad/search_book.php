@@ -92,7 +92,7 @@ require_once('ly_check.php');
 	    <td width="3%" height="26" class="td_bg"><?php echo $rows["price"]?></td>
 	    <td width="3%" height="26" class="td_bg"><?php echo $rows["num"]?></td>
 	    <td class="td_bg" width="20%">
-	    <a href="update.php?ID=<?php echo $rows[ID] ?>" class="trlink">ÐÞ¸Ä</a>&nbsp;&nbsp;<a href="del.php?ID=<?php echo $rows[ID] ?>" class="trlink">É¾³ý</a></td>
+	    <a href="Modify_book.php?ID=<?php echo $rows[ID] ?>" class="trlink">ÐÞ¸Ä</a>&nbsp;&nbsp;<a href="Del_book.php?ID=<?php echo $rows[ID] ?>" class="trlink">É¾³ý</a></td>
 	    </tr>
 	<?php
 	}

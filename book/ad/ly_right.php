@@ -1,6 +1,7 @@
 <?php
-require_once('ly_check.php');
- ?>
+	require_once("../config.php");
+	include("ly_check.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -52,7 +53,7 @@ date_default_timezone_set("Etc/GMT-8");
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="6%" height="19" valign="bottom"><div align="center"><img src="images/tb.gif" width="14" height="14" /></div></td>
-                <td width="94%" valign="bottom"><span class="STYLE1"> 服务器有关参数</span></td>
+                <td width="94%" valign="bottom"><span class="STYLE1"><font size="3"> 服务器有关参数</font></span></td>
               </tr>
             </table></td>
             <td><div align="right"><span class="STYLE1">&nbsp;</span><span class="STYLE1"> &nbsp;</span></div></td>
@@ -66,10 +67,10 @@ date_default_timezone_set("Etc/GMT-8");
       
       <tr>
         <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span class="STYLE19">软件版本</span></div></td>
-        <td height="20" align="center" bgcolor="#FFFFFF" class="STYLE19">网上图书后台管理系统V1</td>
+        <td height="20" align="center" bgcolor="#FFFFFF" class="STYLE19">图书管理系统后台V2</td>
       </tr>
       <tr>
-        <td width="23%" height="20" align="left" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span class="STYLE19">php版本</span></div></td>
+        <td width="23%" height="20" align="left" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><span class="STYLE19">PHP版本</span></div></td>
         <td width="77%" height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><?php echo "PHP".PHP_VERSION; ?></div></td>
         </tr>
       <tr>
@@ -101,12 +102,12 @@ date_default_timezone_set("Etc/GMT-8");
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><?php echo $_SERVER["DOCUMENT_ROOT"]; ?></div></td>
         </tr>
       <tr>
-        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">admin</div></td>
+        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">当前角色</div></td>
         <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">系统管理员</div></td>
       </tr>
       <tr>
-        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">关于作者</div></td>
-        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="http://www.domon.cn" target="_blank">查看主页</a></div></td>
+        <td height="20" align="left" bgcolor="#FFFFFF" class="STYLE19"><div align="center">我的网站</div></td>
+        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><a href="http://www.domon.cn">我的个人网站</a></div></td>
       </tr>
     </table></td>
   </tr>

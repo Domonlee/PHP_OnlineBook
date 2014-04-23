@@ -1,3 +1,7 @@
+<?php
+	require_once("../config.php");
+	include("ly_check.php");
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
@@ -61,26 +65,29 @@ body {
     </li>
 	 <li><a class="head">图书管理</a>
        <ul>
-        <li><a href="list_book.php" target="rightFrame">书籍管理</a></li>
-		<li><a href="add_book.php" target="rightFrame">新书入库</a></li>
+        <li><a href="Admin_book.php" target="rightFrame">图书管理</a></li>
+		<li><a href="Add_book.php" target="rightFrame">添加书籍</a></li>
       </ul>
-    </li>
-	 <li><a class="head">查询管理</a>
-       <ul>
-        <li><a href="search_book.php" target="rightFrame">图书查询</a></li>
-        <li><a href="search_user.php" target="rightFrame">用户查询</a></li>
-      </ul>
-    </li>
 	 <li><a class="head">订单管理</a>
        <ul>
-        <li><a href="search_order.php" target="rightFrame">订单查询</a></li>
-        <li><a href="admin_order.php" target="rightFrame">订单管理</a></li>
+        <li><a href="Manager_order.php " target="rightFrame">查看/管理订单</a></li>
+      </ul>
+    </li>
+	 <li><a class="head">查询功能</a>
+       <ul>
+        <li><a href="Search_book.php " target="rightFrame">书籍查询</a></li>
+      </ul>
+       <ul>
+        <li><a href="Search_user.php " target="rightFrame">用户查询</a></li>
+      </ul>
+       <ul>
+        <li><a href="Search_order.php " target="rightFrame">订单查询</a></li>
       </ul>
     </li>
     <li> <a class="head">版本信息</a>
       <ul>
         <li>
-          <div align="center">V0.2</div>
+          <div align="center">V2</div>
         </li>
       </ul>
     </li>

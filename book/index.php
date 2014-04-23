@@ -1,27 +1,44 @@
 <?php
-include("config.php");
-//屏蔽错误
-error_reporting(E_ALL & ~E_NOTICE);
+ include_once("config.php");
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>网上书店</title>
-<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<?php include("head.php");?>
-		<table width="999" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td height="22">
+<table width="999" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC" >
+  <tr>
+    <td bgcolor="#FFFFFF"><img src="images/top.jpg" width="999" height="150" /></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF"><table width="999" height="30" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" background="images/button1_bg.jpg"><a href="index.php" title="首页">首页</a></td>
+       <!-- <td align="center" background="images/button1_bg.jpg"><a href="?ID=1" title="外国小说">外国小说</a></td>
+        <td align="center" background="images/button1_bg.jpg"><a href="?ID=4" title="计算机相关">计算机相关</a></td>-->
+        <td align="center" background="images/button1_bg.jpg"><a href="login.php"  title="登陆注册">登陆注册</a></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<table width="999" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="300" valign="top">
+<table width="100%" height="176" border="0" cellpadding="0" cellspacing="0" class="center_border">
+      <tr>
+        <td height="175" valign="top">
 	<?php
-	$pagesize=10;
-	if(!urldecode($_GET[proid])){
-	$sql="select * from bookinfo order by ID desc";
+	if(!$_GET[ID]){
+	$sql="select * from bookinfo";
 	}else{
-	$sql="select * from bookinfo where type='".urldecode($_GET[proid])."'";
+	$sql="select * from bookinfo where ID=".$_GET[ID];
 	}
 	$rs=mysql_query($sql);
+	$pagesize=20;
+	$rs=mysql_query($sql);
+
 	$recordcount=mysql_num_rows($rs);
 	$pagecount=($recordcount-1)/$pagesize+1;
 	$pagecount=(int)$pagecount;
@@ -39,92 +56,100 @@ error_reporting(E_ALL & ~E_NOTICE);
 		$pageno=$pagecount;
 	}
 	$startno=($pageno-1)*$pagesize;
-	if(!urldecode($_GET[proid])){
-	$sql="select * from bookinfo order by ID desc limit $startno,$pagesize";
+
+	if(!$_GET[ID]){
+	$sql="select * from bookinfo limit $startno,$pagesize";
 	}else{
-	$sql="select * from bookinfo where type='".urldecode($_GET[proid])."' order by ID desc limit $startno,$pagesize";
+	$sql="select * from bookinfo where ID='".$_GET[id]."' limit $startno,$pagesize";
 	}
 	$rs=mysql_query($sql);
 ?>
-  <table class="hovertable" width="999" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-      <tr>
-        <td width="6%" height="35" align="center" bgcolor="#FFFFFF">ID</td>
-        <td width="21%" align="center" bgcolor="#FFFFFF">书名</td>
-        <td width="15%" align="center" bgcolor="#FFFFFF">作者</td>
-        <td width="10%" align="center" bgcolor="#FFFFFF">ISBN</td>
-        <td width="12%" align="center" bgcolor="#FFFFFF">出版社</td>
-        <td width="12%" align="center" bgcolor="#FFFFFF">类型</td>
-        <td width="9%" align="center" bgcolor="#FFFFFF">出版时间</td>
-        <td width="3%" align="center" bgcolor="#FFFFFF">价格</td>
-        <td width="3%" align="center" bgcolor="#FFFFFF">数量</td>
-        <td width="9%" align="center" bgcolor="#FFFFFF">操作</td>
-      </tr>
-    <?php
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+      <?php
 	while($rows=mysql_fetch_assoc($rs))
 	{
 	?>
-	    <tr align="center" bgcolor="#FFFFFF">
-	    <td width="6%"><?php echo $rows["ID"]?></td>
-	    <td class="td_bg" width="21%" height="26"><?php echo $rows["bookname"]?></td>
-	    <td class="td_bg" width="15%" height="26"><?php echo $rows["author"]?></td>
-	    <td class="td_bg" width="10%" height="26"><?php echo $rows["ISBN"]?></td>
-	    <td width="12%" height="26" class="td_bg"><?php echo $rows["publisher"]?></td>
-	    <td width="12%" height="26" class="td_bg"><?php echo $rows["type"]?></td>
-	    <td width="9%" height="26" class="td_bg"><?php echo $rows["publishtime"]?></td>
-	    <td width="3%" height="26" class="td_bg"><?php echo $rows["price"]?></td>
-	    <td width="3%" height="26" class="td_bg"><?php echo $rows["num"]?></td>
-	    <!--<td class="td_bg" width="20%">  -->
-	  <td align="center" bgcolor="#FFFFFF" class="line2">
-	  <?php 
-	  $rs2=mysql_query("select * from buybook where book_id='".$rows['id']."' and user_id='".$_SESSION['id']."'");
-	  $rows2=mysql_fetch_assoc($rs2);
-	  if($rows2['book_id']){
-	  echo "<font color='red'>您已购买</font>&nbsp;&nbsp;<a href=huanshu.php?book_id=$rows[id]>我要还书</a>";
-	  }else{
-	  	if($rows["leave_number"]==0){
-		echo "<font color='#cccc00'>该书已没有库存</font>";
-		}else{
-	  echo "<a href=jieshu.php?book_id=$rows[id]>我要借书</a>";
-	  }
-	  	}
-	  ?>	  </td>
-	</tr>
-	<?php
+      <td align="left" bgcolor="#FFFFFF" class="forumRowHighlight">
+	  <table width="100%" border="0" cellpadding="5" cellspacing="1" bordercolor="#000000" bgcolor="#CCCCCC">
+  <tr>
+    <td width="100" rowspan="5" align="center" bgcolor="#FFFFFF"><img src="<?php echo $rows["picsrc"]?>" width="80" height="80" /></td>
+    <td bgcolor="#FFFFFF">书籍名称:<?php echo $rows["bookname"]?></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">书籍价格:<?php echo $rows["price"]?></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">书籍类型:	
+	<?php $sql2="select * from booktype where id=".$rows["type"];
+	$rs2=mysql_query($sql2);
+	$rows2=mysql_fetch_assoc($rs2);
+	echo $rows2["booktype"];
+	?>
+	</td>
+  </tr>
+  <tr>
+    <td align="left" bgcolor="#FFFFFF" ><font size="3"><b><a href="#" onClick="window.open('ShoppingCar.php?id=<?php echo $rows["ID"]?>','ShoppingCar','width=550 height=300')">放入购物车</a></font></b></td>
+  </tr>
+  <tr>
+    <td align="left" bgcolor="#FFFFFF"><input type="button" value="详细信息" onClick="window.open('detail.php?id=<?php echo $rows["ID"]?>')" /></td>
+  </tr>
+</table>
+	                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+	                        <tr>
+	                          <td height="3"></td>
+                        </tr>
+                  </table></td>
+			  	  <?php
+			$i++;
+		if($i%2==0)
+		{
+			echo "</tr><tr>";
+		}
 	}
 ?>
-</table>
-<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
+      </tr>
+  </table>
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bordercolor="#000000" bgcolor="#CCCCCC">
   <tr>
-  <td height="35" align="center" bgcolor="#FFFFFF">
+  <td height="30" align="center" background="images/button1_bg.jpg">
   <?php
 	if($pageno==1)
 	{
 	?>
-    首页 | 上一页 | <a href="?pageno=<?php echo $pageno+1?>">下一页</a> | <a href="?pageno=<?php echo $pagecount?>">末页</a>
+    首页 | 上一页 | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pageno+1?>">下一页</a> | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pagecount?>">末页</a>
     <?php
 	}
 	else if($pageno==$pagecount)
 	{
 	?>
-    <a href="?pageno=1">首页</a> | <a href="?pageno=<?php echo $pageno-1?>">上一页</a> | 下一页 | 末页
+    <a href="?ID=<?php echo $_GET[ID] ?>&pageno=1">首页</a> | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pageno-1?>">上一页</a> | 下一页 | 末页
     <?php
 	}
 	else
 	{
 	?>
-    <a href="?pageno=1">首页</a> | <a href="?pageno=<?php echo $pageno-1?>">上一页</a> | <a href="?pageno=<?php echo $pageno+1?>" class="forumRowHighlight">下一页</a> | <a href="?pageno=<?php echo $pagecount?>">末页</a>
+    <a href="?ID=<?php echo $_GET[ID] ?>&pageno=1">首页</a> | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pageno-1?>">上一页</a> | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pageno+1?>" class="forumRowHighlight">下一页</a> | <a href="?ID=<?php echo $_GET[ID] ?>&pageno=<?php echo $pagecount?>">末页</a>
     <?php
 	}
 ?>
     &nbsp;页次：<?php echo $pageno ?>/<?php echo $pagecount ?>页&nbsp;共有<?php echo $recordcount?>条信息</td>
   </tr>
-</table></td></tr>
+  </table>
+          </td></tr>
+    </table>
+</td>
+  </tr>
 </table>
-        <table width="782" height="30" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
-          <tr>
-            <td height="19" align="center" background="button1_bg.jpg">&nbsp;Copyright @ 2014-2014 domon.cn ALL Rights Reserved
-      <script type="text/javascript" src="http://www.04ie.com/net/cpt.js"></script></td>
-          </tr>
-        </table>
+<table width="100%" height="5" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td></td>
+  </tr>
+</table>
+<table width="999" height="30" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
+  <tr>
+    <td align="center" background="images/button1_bg.jpg" bgcolor="#FFFFFF">我的网址：http://www.domon.cn 版权所有：Domon Powered by <a href="http://www.domon.cn" target="_blank" >www.Domon.com</a>  </script></td>
+  </tr>
+</table>
 </body>
 </html>
